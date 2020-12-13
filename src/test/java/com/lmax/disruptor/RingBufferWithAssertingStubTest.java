@@ -1,25 +1,25 @@
 package com.lmax.disruptor;
 
 import com.lmax.disruptor.support.StubEvent;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 public class RingBufferWithAssertingStubTest
 {
     private RingBuffer<StubEvent> ringBuffer;
     private Sequencer sequencer;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         sequencer = new AssertingSequencer(16);
 
-        ringBuffer = new RingBuffer<StubEvent>(StubEvent.EVENT_FACTORY, sequencer);
+        ringBuffer = new RingBuffer<>(StubEvent.EVENT_FACTORY, sequencer);
     }
 
     @Test
